@@ -55,7 +55,14 @@
 								</div>
 								<div class="o-list-bare c-header_nav_item -menu">
 									<ul class="c-header_menu">
-			    						
+			    						{% nav entry in entries %}
+			        						<li class="c-page">
+			            						<a href="#{{ entry.slug|kebab }}">{{ entry.title }}</a>
+									        </li>
+			    						{% endnav %}
+			    						<li class="c-header_nav_separator"></li>	
+			    						<li><a>450-377-3344</a></li>
+			    						<li><a><img src="{{ craft.app.sites.primarySite.baseUrl }}assets/images/icons/synatec-facebook.svg"></a></li>
 									</ul>		
 								</div>
 							</div>			
@@ -81,7 +88,13 @@
 						<div class="o-layout o-layout--bottom">
 							<div class="o-layout_item u-3/5">
 								<ul class="o-layout c-partners">
-							
+								{% for block in global.PartnersList.all() %}
+    								{% if block.type == "PartnersListTab" %}
+    								<li class="o-layout_item">
+        								<img src="{{ block.PartnersListLogo.one().url() }}">
+        							</li>
+    								{% endif %}
+								{% endfor %}								
 								</ul>
 							</div>
 							<div class="o-layout_item u-2/5"><p class="c-footer_copyright">&#169;{{now|date(' Y ')}} {{siteName}} - {{"Une signature de Zel"}}</p></div>	
