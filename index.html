@@ -1,0 +1,226 @@
+{% extends "_layout/site" %}
+{# 
+    AUTHOR          : Agence Zel
+    CREATE DATE     : 10/09/2018
+    LAST UPDATE     : -
+    PURPOSE         : FUT IDEAL - SITE| LAYOUT THEME
+    CURRENT VERSION : 0.0     
+#}
+
+{# DECLARATION #}
+
+{# ASIGNATION #}
+
+{% set entries = craft.entries.section('homeSection').all() %}
+
+{# CODE #}
+
+    {% block content %}
+
+        {% nav entry in entries %}
+            {% if entry.type == 'about'%}
+                <div id="{{ entry.slug|kebab }}">
+                    <div class="c-our-history">
+                        <div class="o-wrapper">
+                            <div class="c-our-history_wrap">
+                                <div class="o-wrapper -five">
+                                    <div class="o-layout">
+                                        <div class="o-layout_item u-2/5">
+                                            <h2><div></div>{{entry.aboutTitleOne}}</h2>
+                                        </div>
+                                        <div class="o-layout_item u-3/5">
+                                            {{entry.communContent}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o-section c-our-mission">
+                        <div class="o-wrapper -two">
+                            <div class="o-layout">
+                                <div class="o-layout_item u-2/5">
+                                    <div class="c-our-mission_img">
+                                        <img src="{{entry.commonImage.one().url()}}">
+                                    </div>
+                                </div>
+                                <div class="o-layout_item u-3/5 c-our-mission_content">
+                                    <h2><div></div>{{entry.aboutTitleTwo}}</h2>
+                                    {{entry.communContentTwo}}
+                                </div>
+                            </div>                        
+                        </div>
+                    </div>    
+                </div>  
+            {% elseif entry.type == 'ourServices'%}
+                <div id="{{ entry.slug|kebab }}" class="o-section c-our-services">
+                    <div class="o-wrapper -four">
+                        {% if entry.servicesList.all() %}
+                            <ul class="o-list-bare c-our-services_ul">
+                                {% for block in entry.servicesList.all() %}
+                                    {% if block.type == "servicesListTab" %}
+                                        <li>
+                                            <div class="c-our-services_visible">
+                                                {% if block.servicesListIcon |length%}
+                                                <div class="c-our-services_icon">
+                                                    <img  src="{{block.servicesListIcon.one().url()}}">
+                                                    </div>
+                                                {% endif %}
+                                                <h3 class="c-our-services_title">{{ block.servicesListName }}</h3>
+                                                <div class="c-accordion-toggle -hidden">
+                                                    <div class="c-accordion-toggle-x">
+                                                        <div class="horizontal"></div>
+                                                        <div class="vertical"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="c-our-services_hidden">
+                                                {% for row in block.servicesListBlock.all() %}
+                                                    {% for block in row.servicesListBlockTabBlock.all() %}
+                                                        {% if block.type == "servicesListBlockTab" %}
+                                                            {{block.servicesListBlockTabTxt}}
+                                                        {% elseif block.type == "servicesListBlockTabBloc" %}
+                                                            234
+                                                        {% endif %}
+                                                    {% endfor %}        
+                                                {% endfor %}        
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            {% elseif entry.type == 'ourTeam'%}       
+                <div id="{{ entry.slug|kebab }}" class="o-section c-our-team">
+                    <div class="o-wrapper -three">
+                        <div class="c-our-team_wrap">
+                            <div class="c-our-team_presentation">
+                                <div class="c-our-team_content u-3/5">
+                                    <h2><div></div>{{entry.title}}</h2>
+                                    {{entry.teamContent}}
+                                </div>  
+      
+                                <div class="c-our-team_img u-1/2">
+                                    <img src="{{entry.teamImage.one().url()}}">
+                                </div>
+                            </div>
+                            <div class="c-our-team_list">
+                                {% if entry.teamlist.all() %}
+                                    <ul class="o-list-bare o-layout o-layout--huge c-our-team_ul">
+                                        {% for block in entry.teamlist.all() %}
+                                            {% if block.type == "teamlistTab" %}
+                                                <li class="o-layout_item u-1/3">
+                                                    <figure>
+                                                        <div class="c-our-team_profil">
+                                                            <img src="{{block.teamListPhoto.one().url()}}">
+                                                            <div class="border one"><div></div></div>
+                                                            <div class="border two"><div></div></div>
+                                                        </div>
+                                                        
+                                                        <figcaption>
+                                                            <h4>{{block.teamlistName}}</h4>
+                                                            <p class="c-our-team_role">{{block.teamlistRole}}</p>
+                                                            <p class="c-our-team_info">{{block.teamlistPhone}}
+                                                            <br>{{block.teamlistEmail}}</p>                                                            
+                                                        </figcaption>   
+                                                    </figure>
+
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}                                
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            {% elseif entry.type == 'contactUs'%}    
+                <div id="{{ entry.slug|kebab }}" class="o-section c-contact">
+                    <div class="o-wrapper -two">
+                        <div class="o-layout">
+                            <div class="o-layout_item u-2/5">
+                                <div class="c-contact_information">
+                                <img src="{{ craft.app.sites.primarySite.baseUrl }}assets/images/logos/synatec-logo--contact-us.svg">
+                                <p>{{entry.contactAddress|nl2br|raw}}</p>
+                                <p class="c-contact_phone">
+                                    Bur : {{entry.contactPhoneDesk}}
+                                    <br>Cel : {{entry.contactCell}}</p>
+                                </p>
+                                <a class="c-contact_mail" href="mailto:{{entry.contactMail}}">{{entry.contactMail}}</a>
+                                <a><img src="{{ craft.app.sites.primarySite.baseUrl }}assets/images/icons/synatec-facebook.svg"></a>
+                                </div>
+                            </div>
+                            <div class="o-layout_item u-3/5">
+                                <div class="c-contact_form">
+                                    <h2><div></div>{{entry.title}}</h2>
+                                    <div class="c-contact_message">{{entry.contactContent}}</div>
+                                    <form autocomplete="off" id="o-form" method="post" action="" accept-charset="UTF-8">
+                                        {{ csrfInput() }}
+                                        <input type="hidden" name="action" value="contact-form/send">
+
+                                        <input id="from-name" type="hidden" name="fromName" value="">
+
+                                        <label>{{"First name"|t}}</label>
+                                        <input id="fname" class="" type="text" data-parsley-error-message="{{ 'This field is required' | translate }}" value="" data-parsley-length="[1, 200]" data-parsley-group="block1" data-parsley-validate-if-empty>
+
+                                        <label>{{"Last name"|t}}</label>
+                                        <input id="lname" class="" type="text" data-parsley-error-message="{{ 'This field is required' |translate }}" value="" data-parsley-length="[1, 200]" data-parsley-group="block1" data-parsley-validate-if-empty>
+                                        
+                                        <label for="from-email">{{"Email"|t}}</label>
+                                        <input id="from-email" type="email" name="fromEmail" value="" data-parsley-length="[1, 200]" data-parsley-group="block1" data-parsley-validate-if-empty>
+
+                                        <label for="phone">{{"Phone"|t}}</label>
+                                        <input id="phone" type="text" name="message[Phone]" data-parsley-error-message="{{ 'This field is required' |translate }}" value="" pattern="[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}" data-parsley-length="[1, 200]" data-parsley-group="block1" data-parsley-validate-if-empty>
+
+                                        <div class="c-contact_radio-button -enterprise">
+                                            <label class="c-contact_radio-button_label">{{"Représentez-vous une entreprise?"|t}}</label>
+                                            <div class="c-contact_radio-button_choice">
+                                                <input type="radio" id="enterprise-yes" name="radio-group">
+                                                <label for="enterprise-yes">Oui</label>
+                                                <input type="radio" id="enterprise-no" name="radio-group" checked>
+                                                <label for="enterprise-no">Non</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="c-enterprise-hidden">
+                                            <label>{{"Nom de l'entreprise"|t}}</label>
+                                            <input id="lname" class="" type="text" data-parsley-error-message="{{ 'This field is required' |translate }}" value="" data-parsley-length="[1, 200]" data-parsley-group="block1" data-parsley-validate-if-empty>
+
+                                            <label>{{"Adresse de l'entreprise"|t}}</label>
+                                            <input id="autocomplete" onFocus="geolocate()" placeholder="" type="text" class="form-control" data-parsley-error-message="{{ 'This field is required' |translate }}" value="" data-parsley-length="[1, 200]" data-parsley-group="block1" data-parsley-validate-if-empty>
+                                        </div>
+
+                                        <div class="c-contact_radio-button -insured">
+                                            <label class="c-contact_radio-button_label">{{"Êtes-vous présentement assuré?"|t}}</label>
+                                            <div class="c-contact_radio-button_choice">
+                                                <input type="radio" id="insured-yes" name="radio-group-two">
+                                                <label for="insured-yes">Oui</label>
+                                                <input type="radio" id="insured-no" name="radio-group-two" checked>
+                                                <label for="insured-no">Non</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="c-insured-hidden">
+                                            <label>{{"Avec quelle compagnie d'assurance?"|t}}</label>
+                                            <input id="autocomplete-ajax" class="" type="text" data-parsley-error-message="{{ 'This field is required' |translate }}" value="" data-parsley-length="[1, 200]" data-parsley-group="block1" data-parsley-validate-if-empty>
+                                            <label>{{"Date de renouvellement"|t}}</label>
+                                            <input id="date-picker" class="" type="text" data-parsley-error-message="{{ 'This field is required' |translate }}" value="" data-parsley-length="[1, 200]" data-parsley-group="block1" data-parsley-validate-if-empty>
+                                        </div>
+
+                                        <label class="c-textbox_label">{{"Message"|t}}</label>
+                                        <textarea  class="u-1/1" rows="10" cols="40" data-parsley-error-message="{{ 'This field is required' |translate }}" id="message" name="message[Description de la question, commentaire ou plainte]"></textarea>    
+
+                                        <div class="c-submit_wrap"><div class="c-submit"><input id="submit" type="submit" value="{{'Submit'|t}}" class="c-btn c-btn--primary"></div></div>
+                                    </form>                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="google_map"></div>
+                </div>           
+
+            {% endif %}            
+        {% endnav %}        
+    {% endblock %}

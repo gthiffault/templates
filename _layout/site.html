@@ -1,0 +1,113 @@
+
+{# 
+	AUTHOR         	: Agence Zel
+	CREATE DATE 	: 10/09/2018
+	LAST UPDATE 	: -
+	PURPOSE     	: FUT IDEAL - SITE| LAYOUT THEME
+	CURRENT VERSION : 0.0     
+#}
+
+{# DECLARATION #}
+
+{# ASIGNATION #}
+	{% set entries = craft.entries.section('homeSection').all() %}
+{# CODE #}
+
+	<!doctype html>
+
+		<html lang="{{craft.app.language}}">
+			<head>
+				<link href="https://fonts.googleapis.com/css?family=Montserrat|PT+Sans|Roboto" rel="stylesheet">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+				<link rel="stylesheet" href="{{ craft.app.sites.primarySite.baseUrl }}assets/css/app.css">
+			</head>
+
+			<body id="barba-wrapper">
+				<style>.c-load-page {width: 100%;height: 100%;background: #f2f2f2;
+				position: fixed;z-index: 1001;top: 0;opacity: 1;}
+				.c-load-page-two {width: 100%;height: 100%;background: #fff;
+				position: fixed;z-index: 999;top: 0;}
+
+				#pageload {
+					position: fixed;
+					height: 240px;
+					width: 240px;
+					top: 50%;
+					left: 50%;
+					margin-top: -120px;
+					margin-left: -120px;
+					z-index: 10001;
+					opacity: 0;
+				}
+
+			</style>
+				<div class="c-load-page"></div>
+				<div id="pageload">
+<svg viewBox="0 0 100 100"><path d="M 1.5,2 L 98,2 L 98,98 L 2,98 L 2,2" stroke="#bbb" stroke-width="12" fill-opacity="0"></path><path id="heart-path" d="M 0,2 L 98,2 L 98,98 L 2,98 L 2,4" stroke="#1E1A49" stroke-width="12" fill-opacity="0" style="stroke-dasharray: 384, 384; stroke-dashoffset: 0;"></path></svg>
+</div>
+				<div  class="barba-container lang-{{craft.app.language}}" data-namespace="page">
+				<header class="c-header">
+					<div class="c-header_navigation header header--fixed">
+						<div class="o-wrapper">
+							<div class="c-header_nav ">
+								<div class="c-header_nav_item -logo">
+									<img src="{{ craft.app.sites.primarySite.baseUrl }}assets/images/logos/synatec_logo.svg">
+								</div>
+								<div class="o-list-bare c-header_nav_item -menu">
+									<ul class="c-header_menu">
+			    						{% nav entry in entries %}
+			        						<li class="c-page">
+			            						<a href="#{{ entry.slug|kebab }}">{{ entry.title }}</a>
+									        </li>
+			    						{% endnav %}
+			    						<li class="c-header_nav_separator"></li>	
+			    						<li><a>450-377-3344</a></li>
+			    						<li><a><img src="{{ craft.app.sites.primarySite.baseUrl }}assets/images/icons/synatec-facebook.svg"></a></li>
+									</ul>		
+								</div>
+							</div>			
+						</div>
+					</div>
+			        <div class="c-header_banner">
+			            <div class="o-wrapper">
+			                <div class="c-banner_bg" style="background: url('{{global.headerImage.one().url()}}') #2a2a2a">
+			                    <div class="c-banner_info">
+			                    <p class="c-banner_title">{{global.headerTitleOne}}<br>{{global.headerTitleTwo}}</p>
+			                    <p class="c-banner_description">{{global.headerDescription}}</p>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>									
+				</header>
+				<main class="c-main">
+					{% block content %}{% endblock %}	
+				</main>
+				<footer>
+					<div class="c-footer_wrap">
+					<div class="o-wrapper">
+						<div class="o-layout o-layout--bottom">
+							<div class="o-layout_item u-3/5">
+								<ul class="o-layout c-partners">
+								{% for block in global.PartnersList.all() %}
+    								{% if block.type == "PartnersListTab" %}
+    								<li class="o-layout_item">
+        								<img src="{{ block.PartnersListLogo.one().url() }}">
+        							</li>
+    								{% endif %}
+								{% endfor %}								
+								</ul>
+							</div>
+							<div class="o-layout_item u-2/5"><p class="c-footer_copyright">&#169;{{now|date(' Y ')}} {{siteName}} - {{"Une signature de Zel"}}</p></div>	
+						</div>
+					</div>
+					</div>
+					<script src="{{ craft.app.sites.primarySite.baseUrl }}assets/script/app.js"></script>
+				</footer>
+				</div>
+			</body>
+		</html>					
+
+
+
+
