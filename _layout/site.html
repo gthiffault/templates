@@ -10,6 +10,7 @@
 {# DECLARATION #}
 
 {# ASIGNATION #}
+	{% set entries = craft.entries.section('homeSection').all() %}
 {# CODE #}
 
 	<!doctype html>
@@ -56,7 +57,11 @@
 								<div class="o-list-bare c-header_nav_item -menu">
 									<ul class="c-header_menu">
 			    						{% nav entry in entries %}
-			        						<li class="c-page">
+			    						{% if loop.index == 1 %}
+			        						<li class="c-page -first">
+			        					{% else %}		
+			        						<li class="c-page -other">
+			        					{% endif %}		
 			            						<a href="#{{ entry.slug|kebab }}">{{ entry.title }}</a>
 									        </li>
 			    						{% endnav %}

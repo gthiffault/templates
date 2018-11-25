@@ -20,6 +20,9 @@
         {% nav entry in entries %}
             {% if entry.type == 'about'%}
                 <div id="{{ entry.slug|kebab }}">
+                    <div class="o-wrapper">
+                    <div class="c-about_mask"></div>
+                </div>
                     <div class="c-our-history">
                         <div class="o-wrapper">
                             <div class="c-our-history_wrap">
@@ -155,6 +158,7 @@
                             <div class="o-layout_item u-3/5">
                                 <div class="c-contact_form">
                                     <h2><div></div>{{entry.title}}</h2>
+                                    <h3 class="invalid-form-error-message"></h3>
                                     <div class="c-contact_message">{{entry.contactContent}}</div>
                                     <form autocomplete="off" id="o-form" method="post" action="" accept-charset="UTF-8">
                                         {{ csrfInput() }}
@@ -167,7 +171,7 @@
 
                                         <label>{{"Last name"|t}}</label>
                                         <input id="lname" class="" type="text" data-parsley-error-message="{{ 'This field is required' |translate }}" value="" data-parsley-length="[1, 200]" data-parsley-group="block1" data-parsley-validate-if-empty>
-                                        
+
                                         <label for="from-email">{{"Email"|t}}</label>
                                         <input id="from-email" type="email" name="fromEmail" value="" data-parsley-length="[1, 200]" data-parsley-group="block1" data-parsley-validate-if-empty>
 
@@ -177,40 +181,40 @@
                                         <div class="c-contact_radio-button -enterprise">
                                             <label class="c-contact_radio-button_label">{{"Représentez-vous une entreprise?"|t}}</label>
                                             <div class="c-contact_radio-button_choice">
-                                                <input type="radio" id="enterprise-yes" name="radio-group">
+                                                <input type="radio" id="enterprise-yes" name="message[Entreprise]" value="Oui">
                                                 <label for="enterprise-yes">Oui</label>
-                                                <input type="radio" id="enterprise-no" name="radio-group" checked>
+                                                <input type="radio" id="enterprise-no" name="message[Entreprise]" checked value="Non">
                                                 <label for="enterprise-no">Non</label>
                                             </div>
                                         </div>
 
                                         <div class="c-enterprise-hidden">
                                             <label>{{"Nom de l'entreprise"|t}}</label>
-                                            <input id="lname" class="" type="text" data-parsley-error-message="{{ 'This field is required' |translate }}" value="" data-parsley-length="[1, 200]" data-parsley-group="block1" data-parsley-validate-if-empty>
+                                            <input id="enterprise-name" class="" type="text" name="">
 
                                             <label>{{"Adresse de l'entreprise"|t}}</label>
-                                            <input id="autocomplete" onFocus="geolocate()" placeholder="" type="text" class="form-control" data-parsley-error-message="{{ 'This field is required' |translate }}" value="" data-parsley-length="[1, 200]" data-parsley-group="block1" data-parsley-validate-if-empty>
+                                            <input id="autocomplete" onFocus="geolocate()" placeholder=""  name="" type="text">
                                         </div>
 
                                         <div class="c-contact_radio-button -insured">
                                             <label class="c-contact_radio-button_label">{{"Êtes-vous présentement assuré?"|t}}</label>
                                             <div class="c-contact_radio-button_choice">
-                                                <input type="radio" id="insured-yes" name="radio-group-two">
+                                                <input type="radio" id="insured-yes" name="message[Déjà assuré]" value="Oui">
                                                 <label for="insured-yes">Oui</label>
-                                                <input type="radio" id="insured-no" name="radio-group-two" checked>
+                                                <input type="radio" id="insured-no" name="message[Déjà assuré]" checked value="Non">
                                                 <label for="insured-no">Non</label>
                                             </div>
                                         </div>
 
                                         <div class="c-insured-hidden">
                                             <label>{{"Avec quelle compagnie d'assurance?"|t}}</label>
-                                            <input id="autocomplete-ajax" class="" type="text" data-parsley-error-message="{{ 'This field is required' |translate }}" value="" data-parsley-length="[1, 200]" data-parsley-group="block1" data-parsley-validate-if-empty>
+                                            <input id="autocomplete-ajax" class="" type="text" name="message[Compagnie d'assurance]">
                                             <label>{{"Date de renouvellement"|t}}</label>
-                                            <input id="date-picker" class="" type="text" data-parsley-error-message="{{ 'This field is required' |translate }}" value="" data-parsley-length="[1, 200]" data-parsley-group="block1" data-parsley-validate-if-empty>
+                                            <input id="date-picker" type="text" name="message[Date d'échéance]">
                                         </div>
 
                                         <label class="c-textbox_label">{{"Message"|t}}</label>
-                                        <textarea  class="u-1/1" rows="10" cols="40" data-parsley-error-message="{{ 'This field is required' |translate }}" id="message" name="message[Description de la question, commentaire ou plainte]"></textarea>    
+                                        <textarea  class="u-1/1" rows="10" cols="40" data-parsley-required="true" id="message" name="message[Description de la question, commentaire ou plainte]"></textarea>    
 
                                         <div class="c-submit_wrap"><div class="c-submit"><input id="submit" type="submit" value="{{'Submit'|t}}" class="c-btn c-btn--primary"></div></div>
                                     </form>                                
