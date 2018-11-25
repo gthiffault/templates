@@ -58,9 +58,9 @@
 									<ul class="c-header_menu">
 			    						{% nav entry in entries %}
 			    						{% if loop.index == 1 %}
-			        						<li class="c-page -first">
+			        						<li class="c-page">
 			        					{% else %}		
-			        						<li class="c-page -other">
+			        						<li class="c-page">
 			        					{% endif %}		
 			            						<a href="#{{ entry.slug|kebab }}">{{ entry.title }}</a>
 									        </li>
