@@ -16,7 +16,6 @@
 {# CODE #}
 
     {% block content %}
-
         {% nav entry in entries %}
             {% if entry.type == 'about'%}
                 <div id="{{ entry.slug|kebab }}">
@@ -28,10 +27,10 @@
                             <div class="c-our-history_wrap">
                                 <div class="o-wrapper -five">
                                     <div class="o-layout">
-                                        <div class="o-layout_item u-2/5@">
+                                        <div class="o-layout_item u-2/5@portrait-large-tablet">
                                             <h2><div></div>{{entry.aboutTitleOne}}</h2>
                                         </div>
-                                        <div class="o-layout_item u-3/5@">
+                                        <div class="o-layout_item u-3/5@portrait-large-tablet">
                                             {{entry.communContent}}
                                         </div>
                                     </div>
@@ -42,12 +41,12 @@
                     <div class="o-section c-our-mission">
                         <div class="o-wrapper -two">
                             <div class="o-layout">
-                                <div class="o-layout_item u-2/5@">
+                                <div class="o-layout_item u-2/5@portrait-medium-tablet u-4/5@portrait-small-tablet">
                                     <div class="c-our-mission_img">
                                         <img src="{{entry.commonImage.one().url()}}">
                                     </div>
                                 </div>
-                                <div class="o-layout_item u-3/5@ c-our-mission_content">
+                                <div class="o-layout_item u-3/5@portrait-medium-tablet c-our-mission_content">
                                     <h2><div></div>{{entry.aboutTitleTwo}}</h2>
                                     {{entry.communContentTwo}}
                                 </div>
@@ -100,21 +99,24 @@
                     <div class="o-wrapper -three">
                         <div class="c-our-team_wrap">
                             <div class="c-our-team_presentation">
-                                <div class="c-our-team_content u-3/5@">
+
+                                <div class="c-our-team_img u-1/2@portrait-medium-tablet">
+                                    <img src="{{entry.teamImage.one().url()}}">
+                                </div>
+
+                                <div class="c-our-team_content u-3/5@portrait-medium-tablet">
                                     <h2><div></div>{{entry.title}}</h2>
                                     {{entry.teamContent}}
                                 </div>  
       
-                                <div class="c-our-team_img u-1/2@">
-                                    <img src="{{entry.teamImage.one().url()}}">
-                                </div>
+
                             </div>
                             <div class="c-our-team_list">
                                 {% if entry.teamlist.all() %}
                                     <ul class="o-list-bare o-layout o-layout--huge c-our-team_ul">
                                         {% for block in entry.teamlist.all() %}
                                             {% if block.type == "teamlistTab" %}
-                                                <li class="o-layout_item u-1/3@">
+                                                <li class="o-layout_item u-1/3@landscape-large-tablet u-1/2@portrait-medium-tablet">
                                                     <figure>
                                                         <div class="c-our-team_profil">
                                                             <img src="{{block.teamListPhoto.one().url()}}">
@@ -142,22 +144,11 @@
             {% elseif entry.type == 'contactUs'%}    
                 <div id="{{ entry.slug|kebab }}" class="o-section c-contact">
                     <div class="o-wrapper -two">
-                        <div class="o-layout">
-                            <div class="o-layout_item u-2/5@">
-                                <div class="c-contact_information">
-                                <img src="{{ craft.app.sites.primarySite.baseUrl }}assets/images/logos/synatec-logo--contact-us.svg">
-                                <p>{{entry.contactAddress|nl2br|raw}}</p>
-                                <p class="c-contact_phone">
-                                    Bur : {{entry.contactPhoneDesk}}
-                                    <br>Cel : {{entry.contactCell}}</p>
-                                </p>
-                                <a class="c-contact_mail" href="mailto:{{entry.contactMail}}">{{entry.contactMail}}</a>
-                                <a><img src="{{ craft.app.sites.primarySite.baseUrl }}assets/images/icons/synatec-facebook.svg"></a>
-                                </div>
-                            </div>
-                            <div class="o-layout_item u-3/5@">
+
+                        <div class="o-layout o-layout--reverse">
+                            <div class="o-layout_item u-3/5@landscape-small-tablet">
                                 <div class="c-contact_form">
-                                    <h2><div></div>{{entry.title}}</h2>
+                                    <h2><div></div>{{entry.contactTitle}}</h2>
                                     <h3 class="invalid-form-error-message"></h3>
                                     <div class="c-contact_message">{{entry.contactContent}}</div>
                                     <form autocomplete="off" id="o-form" method="post" action="" accept-charset="UTF-8">
@@ -219,7 +210,20 @@
                                         <div class="c-submit_wrap"><div class="c-submit"><input id="submit" type="submit" value="{{'Submit'|t}}" class="c-btn c-btn--primary"></div></div>
                                     </form>                                
                                 </div>
+                            </div>                            
+                            <div class="o-layout_item u-2/5@landscape-small-tablet">
+                                <div class="c-contact_information">
+                                <img src="{{ craft.app.sites.primarySite.baseUrl }}assets/images/logos/synatec-logo--contact-us.svg">
+                                <p>{{entry.contactAddress|nl2br|raw}}</p>
+                                <p class="c-contact_phone">
+                                    Bur : {{entry.contactPhoneDesk}}
+                                    <br>Cel : {{entry.contactCell}}</p>
+                                </p>
+                                <a class="c-contact_mail" href="mailto:{{entry.contactMail}}">{{entry.contactMail}}</a>
+                                <a><img src="{{ craft.app.sites.primarySite.baseUrl }}assets/images/icons/synatec-facebook.svg"></a>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <div id="google_map"></div>
