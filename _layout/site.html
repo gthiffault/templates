@@ -31,15 +31,47 @@
 
 				#pageload {
 					position: fixed;
-					height: 240px;
-					width: 240px;
 					top: 50%;
 					left: 50%;
-					margin-top: -120px;
-					margin-left: -120px;
+
 					z-index: 10001;
 					opacity: 0;
 				}
+
+@media only screen and (min-width: 320px) {
+				#pageload {
+					height: 90px;
+					width: 90px;
+					margin-top: -45px;
+					margin-left: -45px;					
+				}	
+}
+
+
+@media only screen and (min-width: 720px) {
+				#pageload {
+					height: 120px;
+					width: 120px;
+					margin-top: -60px;
+					margin-left: -60px;					
+				}	
+}
+@media only screen and (min-width: 1024px) {
+				#pageload {
+					height: 180px;
+					width: 180px;
+					margin-top: -90px;
+					margin-left: -90px;					
+				}	
+}
+@media only screen and (min-width: 1280px) {
+				#pageload {
+					height: 240px;
+					width: 240px;
+					margin-top: -120px;
+					margin-left: -120px;					
+				}	
+}
 
 			</style>
 				<div class="c-load-page"></div>
@@ -68,11 +100,34 @@
 			    						<li class="c-header_nav_separator"></li>	
 			    						<li><a>450-377-3344</a></li>
 			    						<li><a><img src="{{ craft.app.sites.primarySite.baseUrl }}assets/images/icons/synatec-facebook.svg"></a></li>
-									</ul>		
+									</ul>	
+<button class="hamburger hamburger--spring" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>										
 								</div>
 							</div>			
 						</div>
 					</div>
+<div class="c-header_menu_device">
+	<div class="o-wrapper">
+									<ul class="c-header_menu_device_ul">
+			    						{% nav entry in entries %}
+			    						{% if loop.index == 1 %}
+			        						<li class="c-page">
+			        					{% else %}		
+			        						<li class="c-page">
+			        					{% endif %}		
+			            						<a href="#{{ entry.slug|kebab }}">{{ entry.title }}</a>
+									        </li>
+			    						{% endnav %}
+			    						<li><a>450-377-3344</a></li>
+			    						<li><a><img src="{{ craft.app.sites.primarySite.baseUrl }}assets/images/icons/synatec-facebook.svg"></a></li>
+									</ul>	
+</div>
+</div>
+
 			        <div class="c-header_banner">
 			            <div class="o-wrapper">
 			                <div class="c-banner_bg" style="background: url('{{global.headerImage.one().url()}}') #2a2a2a">
@@ -92,7 +147,7 @@
 					<div class="c-footer_wrap">
 					<div class="o-wrapper">
 						<div class="o-layout o-layout--bottom">
-							<div class="o-layout_item u-3/5@">
+							<div class="o-layout_item c-footer_partenr u-3/5@landscape-large-tablet u-1/2@landscape-medium-tablet">
 								<ul class="o-layout c-partners">
 								{% for block in global.PartnersList.all() %}
     								{% if block.type == "PartnersListTab" %}
@@ -103,7 +158,7 @@
 								{% endfor %}								
 								</ul>
 							</div>
-							<div class="o-layout_item u-2/5@"><p class="c-footer_copyright">&#169;{{now|date(' Y ')}} {{siteName}} - {{"Une signature de Zel"}}</p></div>	
+							<div class="o-layout_item u-2/5@landscape-large-tablet u-1/2@landscape-medium-tablet"><p class="c-footer_copyright">&#169;{{now|date(' Y ')}} {{siteName}} - {{"Une signature de Zel"}}</p></div>	
 						</div>
 					</div>
 					</div>
