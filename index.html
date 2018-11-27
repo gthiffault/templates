@@ -30,7 +30,7 @@
                                         <div class="o-layout_item u-2/5@portrait-large-tablet">
                                             <h2><div></div>{{entry.aboutTitleOne}}</h2>
                                         </div>
-                                        <div class="o-layout_item u-3/5@portrait-large-tablet">
+                                        <div class="o-layout_item c-our-history_content u-3/5@portrait-large-tablet">
                                             {{entry.communContent}}
                                         </div>
                                     </div>
@@ -80,9 +80,17 @@
                                                 {% for row in block.servicesListBlock.all() %}
                                                     {% for block in row.servicesListBlockTabBlock.all() %}
                                                         {% if block.type == "servicesListBlockTab" %}
+                                                        <div class="c-our-services_hidden_section">
+                                                            {% if block.serviceMatrixContentTxtTitle|length %}<h5>{{block.serviceMatrixContentTxtTitle}}</h5>{% endif %}
                                                             {{block.servicesListBlockTabTxt}}
+                                                        </div>
                                                         {% elseif block.type == "servicesListBlockTabBloc" %}
-                                                            234
+                                                            <div class="c-our-services_hidden_section c-bloc-section">
+                                                                <div class="o-wrapper -six">
+                                            <p class="c-our-services_description">{{block.descriptionLink}}</p>
+                                                                    <a class="c-btn c-btn--secondary" href="#{{block.linkIntern.one().slug|kebab}}">{{block.linkIntern.one().title}}</a>
+                                                                </div>
+                                                            </div>
                                                         {% endif %}
                                                     {% endfor %}        
                                                 {% endfor %}        
